@@ -42,6 +42,34 @@
 		component: './ToDoList/index',
 		icon: 'UnorderedListOutlined',
 	},
+	{
+		path: '/guess-number',
+		name: 'Guess Number',
+		component: '@/components/GuessNumber/GuessNumber',
+		icon: 'QuestionOutlined',
+	  },
+	  {
+		path: '/study-tracker/category',
+		name: 'Study Category',
+		component: '@/components/StudyTracker/StudyCategory',
+	  },
+	  {
+		path: '/study-tracker/goals',
+		name: 'Study Goals',
+		component: '@/components/StudyTracker/StudyGoals',
+	  },
+	  {
+		path: '/study-tracker/progress',
+		name: 'Study Progress',
+		component: '@/components/StudyTracker/StudyProgress',
+	  },
+	  
+	  
+	
+	  
+
+	
+	
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',

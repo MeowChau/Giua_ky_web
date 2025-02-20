@@ -1,54 +1,97 @@
-import { useState } from 'react';
-import { List, Input, Button, Checkbox, Card } from 'antd';
-import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
+import { Modal, Button, Input } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import "./ToDoList.css";  // Import file CSS riêng
 
-const ToDoList = () => {
-  const [tasks, setTasks] = useState([{ text: 'Làm bài tập React', done: false }]);
-  const [newTask, setNewTask] = useState('');
+interface Task {
+  key: string;
+  title: string;
+  description: string;
+}
 
-  const addTask = () => {
-    if (newTask.trim()) {
-      setTasks([...tasks, { text: newTask, done: false }]);
-      setNewTask('');
-    }
+const ToDoList: React.FC = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [newTask, setNewTask] = useState({ title: "", description: "" });
+
+  const showModal = () => {
+    setEditIndex(null);
+    setNewTask({ title: "", description: "" });
+    setModalVisible(true);
   };
 
-  const toggleTask = (index: number) => {
-    const updatedTasks = [...tasks];
-    updatedTasks[index].done = !updatedTasks[index].done;
-    setTasks(updatedTasks);
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
+
+  const handleInsert = () => {
+    if (newTask.title.trim() && newTask.description.trim()) {
+      if (editIndex !== null) {
+        const updatedTasks = [...tasks];
+        updatedTasks[editIndex] = { ...updatedTasks[editIndex], ...newTask };
+        setTasks(updatedTasks);
+      } else {
+        setTasks([...tasks, { key: `${tasks.length + 1}`, ...newTask }]);
+      }
+    }
+    setModalVisible(false);
   };
 
   const deleteTask = (index: number) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks);
+    setTasks(tasks.filter((_, i) => i !== index));
+  };
+
+  const editTask = (index: number) => {
+    setEditIndex(index);
+    setNewTask({ title: tasks[index].title, description: tasks[index].description });
+    setModalVisible(true);
   };
 
   return (
-    <Card title="To-Do List" style={{ maxWidth: 500, margin: 'auto', marginTop: 20, borderRadius: 10, boxShadow: '0px 4px 10px rgba(0,0,0,0.1)' }}>
-      <Input
-        placeholder="Thêm công việc mới..."
-        value={newTask}
-        onChange={(e) => setNewTask(e.target.value)}
-        onPressEnter={addTask}
-        suffix={<Button type="primary" icon={<PlusOutlined />} onClick={addTask} />}
-      />
-      <List
-        style={{ marginTop: 20 }}
-        bordered
-        dataSource={tasks}
-        renderItem={(item, index) => (
-          <List.Item
-            style={{ textDecoration: item.done ? 'line-through' : 'none', display: 'flex', justifyContent: 'space-between' }}
-          >
-            <Checkbox checked={item.done} onChange={() => toggleTask(index)}>
-              {item.text}
-            </Checkbox>
-            <Button type="text" icon={<DeleteOutlined />} danger onClick={() => deleteTask(index)} />
-          </List.Item>
-        )}
-      />
-    </Card>
+    <div className="todo-container">
+      <h2>All Tasks</h2>
+      <Button type="primary" onClick={showModal}>+ Add Task</Button>
+
+      <div className="task-grid">
+        {tasks.map((task, index) => (
+          <div key={task.key} className="task-card">
+            <h3 className="task-title">{task.title}</h3>
+            <p>{task.description}</p>
+            <div className="task-actions">
+              <EditOutlined onClick={() => editTask(index)} />
+              <DeleteOutlined onClick={() => deleteTask(index)} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <Modal 
+        title={editIndex !== null ? "Edit Task" : "Add Task"} 
+        visible={modalVisible} 
+        onCancel={handleCancel}
+        footer={[
+          <Button key="cancel" onClick={handleCancel}>Cancel</Button>,
+          <Button key="insert" type="primary" onClick={handleInsert}>
+            {editIndex !== null ? "Update" : "Insert"}
+          </Button>,
+        ]}
+      >
+        <label>Title:</label>
+        <Input 
+          placeholder="Enter task title..." 
+          value={newTask.title} 
+          onChange={(e) => setNewTask({ ...newTask, title: e.target.value })} 
+        />
+
+        <label>Description:</label>
+        <Input.TextArea
+          placeholder="Enter task description..." 
+          value={newTask.description} 
+          onChange={(e) => setNewTask({ ...newTask, description: e.target.value })} 
+        />
+      </Modal>
+    </div>
   );
 };
 
