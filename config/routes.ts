@@ -37,39 +37,55 @@
 		icon: 'ArrowsAltOutlined',
 	},
 	
-	// QUẢN LÝ KHÓA HỌC
 	{
-		path: '/courses',
-		name: 'Courses',
-		icon: 'BookOutlined',
-		routes: [
-		  {
-			path: '/courses',
-			redirect: '/courses/list', // Redirect đến danh sách khóa học
-		  },
-		  {
-			path: '/courses/list',
-			name: 'CourseList',
-			component: './Courses/CourseList', // Hiển thị danh sách khóa học
-		  },
-		  {
-			path: '/courses/add',
-			name: 'AddCourse',
-			component: './Courses/AddCourse', // Trang thêm khóa học
-			hideInMenu: true, // Ẩn khỏi menu
-		  },
-		  {
-			path: '/courses/edit/:id',
-			name: 'EditCourse',
-			component: './Courses/EditCourse', // Trang chỉnh sửa khóa học
-			hideInMenu: true, // Ẩn khỏi menu
-		  },
-		],
-	  },
-	
+        path: '/orders',
+        name: 'Order Management',
+        icon: 'ShoppingCartOutlined',
+        routes: [
+            {
+                name: 'Order List',
+                path: '/orders/list',
+                component: './OrderManagement/OrderList',
+            },
+            {
+                name: 'Add/Edit Order',
+                path: '/orders/edit/:id?',
+                component: './OrderManagement/OrderEdit',
+                hideInMenu: true,
+            },
+            {
+                name: 'Order Details',
+                path: '/orders/details/:id',
+                component: './OrderManagement/OrderDetails',
+                hideInMenu: true,
+            },
+        ],
+    },
 
-	
-	
+	{
+        path: '/courses',
+        name: 'Courses',
+        icon: 'BookOutlined',
+        routes: [
+            {
+                name: 'Course List',
+                path: '/courses/list',
+                component: './Courses/CourseList', // Ensure this file exists
+            },
+            {
+                name: 'Add Course',
+                path: '/courses/add',
+                component: './Courses/AddCourse', // Ensure this file exists
+            },
+            {
+                name: 'Edit Course',
+                path: '/courses/edit/:id',
+                component: './Courses/EditCourse', // Ensure this file exists
+                hideInMenu: true,
+            },
+        ],
+    },
+
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
