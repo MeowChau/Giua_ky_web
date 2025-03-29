@@ -36,56 +36,33 @@
 		component: './RandomUser',
 		icon: 'ArrowsAltOutlined',
 	},
+	  // EMPLOYEE MANAGEMENT
+  {
+    name: 'Employee Management',
+    path: '/employees',
+    icon: 'TeamOutlined',
+    routes: [
+      {
+        name: 'Employee List',
+        path: '/employees/list',
+        component: './Employee/EmployeeList',
+      },
+      {
+        name: 'Add Employee',
+        path: '/employees/add',
+        component: '@/components/Employee/EmployeeForm',
+        hideInMenu: true,
+      },
+      {
+        name: 'Edit Employee',
+        path: '/employees/edit/:id',
+        component: '@/components/Employee/EmployeeForm',
+        hideInMenu: true,
+      },
+    ],
+  },
+
 	
-	{
-        path: '/orders',
-        name: 'Order Management',
-        icon: 'ShoppingCartOutlined',
-        routes: [
-            {
-                name: 'Order List',
-                path: '/orders/list',
-                component: './OrderManagement/OrderList',
-            },
-            {
-                name: 'Add/Edit Order',
-                path: '/orders/edit/:id?',
-                component: './OrderManagement/OrderEdit',
-                hideInMenu: true,
-            },
-            {
-                name: 'Order Details',
-                path: '/orders/details/:id',
-                component: './OrderManagement/OrderDetails',
-                hideInMenu: true,
-            },
-        ],
-    },
-
-	{
-        path: '/courses',
-        name: 'Courses',
-        icon: 'BookOutlined',
-        routes: [
-            {
-                name: 'Course List',
-                path: '/courses/list',
-                component: './Courses/CourseList', // Ensure this file exists
-            },
-            {
-                name: 'Add Course',
-                path: '/courses/add',
-                component: './Courses/AddCourse', // Ensure this file exists
-            },
-            {
-                name: 'Edit Course',
-                path: '/courses/edit/:id',
-                component: './Courses/EditCourse', // Ensure this file exists
-                hideInMenu: true,
-            },
-        ],
-    },
-
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
