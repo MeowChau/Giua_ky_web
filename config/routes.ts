@@ -36,33 +36,13 @@
 		component: './RandomUser',
 		icon: 'ArrowsAltOutlined',
 	},
-	  // EMPLOYEE MANAGEMENT
-  {
-    name: 'Employee Management',
-    path: '/employees',
-    icon: 'TeamOutlined',
-    routes: [
-      {
-        name: 'Employee List',
-        path: '/employees/list',
-        component: './Employee/EmployeeList',
-      },
-      {
-        name: 'Add Employee',
-        path: '/employees/add',
-        component: '@/components/Employee/EmployeeForm',
-        hideInMenu: true,
-      },
-      {
-        name: 'Edit Employee',
-        path: '/employees/edit/:id',
-        component: '@/components/Employee/EmployeeForm',
-        hideInMenu: true,
-      },
-    ],
-  },
 
-	
+	{
+		path: '/phong-hoc',
+		name: 'Quản lý phòng học',
+		component: './PhongHoc',
+		icon: 'BankOutlined',
+	  },
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
