@@ -36,13 +36,14 @@
 		component: './RandomUser',
 		icon: 'ArrowsAltOutlined',
 	},
-
 	{
-		path: '/phong-hoc',
-		name: 'Quản lý phòng học',
-		component: './PhongHoc',
-		icon: 'BankOutlined',
+		path: '/courses',
+		name: 'Quản lý khóa học',
+		icon: 'BookOutlined',
+		component: './Course/CourseManagementPage', // Đường dẫn mới theo cấu trúc
 	  },
+	
+	
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
