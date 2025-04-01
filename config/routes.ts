@@ -36,56 +36,13 @@
 		component: './RandomUser',
 		icon: 'ArrowsAltOutlined',
 	},
+	{
+		name: 'Quản lý đơn hàng',
+		path: '/don-hang',
+		icon: 'ShoppingCartOutlined',
+		component: './Order',
+	  },
 	
-	{
-        path: '/orders',
-        name: 'Order Management',
-        icon: 'ShoppingCartOutlined',
-        routes: [
-            {
-                name: 'Order List',
-                path: '/orders/list',
-                component: './OrderManagement/OrderList',
-            },
-            {
-                name: 'Add/Edit Order',
-                path: '/orders/edit/:id?',
-                component: './OrderManagement/OrderEdit',
-                hideInMenu: true,
-            },
-            {
-                name: 'Order Details',
-                path: '/orders/details/:id',
-                component: './OrderManagement/OrderDetails',
-                hideInMenu: true,
-            },
-        ],
-    },
-
-	{
-        path: '/courses',
-        name: 'Courses',
-        icon: 'BookOutlined',
-        routes: [
-            {
-                name: 'Course List',
-                path: '/courses/list',
-                component: './Courses/CourseList', // Ensure this file exists
-            },
-            {
-                name: 'Add Course',
-                path: '/courses/add',
-                component: './Courses/AddCourse', // Ensure this file exists
-            },
-            {
-                name: 'Edit Course',
-                path: '/courses/edit/:id',
-                component: './Courses/EditCourse', // Ensure this file exists
-                hideInMenu: true,
-            },
-        ],
-    },
-
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
