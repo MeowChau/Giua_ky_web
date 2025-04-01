@@ -1,27 +1,45 @@
-import type { Employee } from '@/models/Employee/employeeTypes';
+import { useLocalStorageState } from 'ahooks';
+import type { Employee } from '../../models/Employee/employee';
 
-export const getEmployees = (): Employee[] => {
-  return JSON.parse(localStorage.getItem('employees') || '[]');
-};
+export const useEmployeeService = () => {
+  const [employees, setEmployees] = useLocalStorageState<Employee[]>('employee-data', {
+    defaultValue: []
+  });
 
-export const saveEmployees = (employees: Employee[]) => {
-  localStorage.setItem('employees', JSON.stringify(employees));
-};
+  const generateEmployeeId = () => {
+    const timestamp = Date.now().toString().slice(-4);
+    const random = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+    return `NV-${timestamp}${random}`;
+  };
 
-export const addEmployee = (employee: Employee) => {
-  const employees = getEmployees();
-  employees.push(employee);
-  saveEmployees(employees);
-};
+  const addEmployee = (employee: Omit<Employee, 'id'>) => {
+    const newEmployee: Employee = {
+      id: generateEmployeeId(),
+      ...employee
+    };
+    setEmployees(prev => [...(prev || []), newEmployee]);
+    return newEmployee;
+  };
 
-export const updateEmployee = (updatedEmployee: Employee) => {
-  const employees = getEmployees().map((emp) =>
-    emp.id === updatedEmployee.id ? updatedEmployee : emp
-  );
-  saveEmployees(employees);
-};
+  const updateEmployee = (id: string, employee: Partial<Employee>) => {
+    setEmployees(prev => 
+      (prev || []).map(emp => 
+        emp.id === id ? { ...emp, ...employee } : emp
+      )
+    );
+  };
 
-export const deleteEmployee = (id: string) => {
-  const employees = getEmployees().filter((emp) => emp.id !== id);
-  saveEmployees(employees);
+  const deleteEmployee = (id: string) => {
+    setEmployees(prev => (prev || []).filter(emp => emp.id !== id));
+  };
+
+  const getEmployees = () => employees || [];
+
+  return {
+    employees: getEmployees(),
+    addEmployee,
+    updateEmployee,
+    deleteEmployee,
+    generateEmployeeId
+  };
 };
