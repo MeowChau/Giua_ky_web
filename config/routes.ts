@@ -40,9 +40,8 @@
 		name: 'Quản lý đơn hàng',
 		path: '/don-hang',
 		icon: 'ShoppingCartOutlined',
-		component: './Order',
+		component: './Order/OrderPage', 
 	  },
-	
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
