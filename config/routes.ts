@@ -15,6 +15,7 @@
 			},
 		],
 	},
+	
 
 	///////////////////////////////////
 	// DEFAULT MENU
@@ -37,12 +38,11 @@
 		icon: 'ArrowsAltOutlined',
 	},
 	{
-		path: '/courses',
-		name: 'Quản lý khóa học',
-		icon: 'BookOutlined',
-		component: './Course/CourseManagementPage', // Đường dẫn mới theo cấu trúc
-	  },
-	
+        name: 'Quản lý phòng học',
+        path: 'phong-hoc',
+        component: './Classroom',
+        icon: 'BankOutlined',
+      },
 	
 	// DANH MUC HE THONG
 	// {
